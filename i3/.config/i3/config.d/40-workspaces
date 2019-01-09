@@ -1,0 +1,50 @@
+
+# Define names for default workspaces for which we configure key bindings later on.
+# We use variables to avoid repeating the names in multiple places.
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws0 "10"
+
+# frencgh keyboards ...
+set $azer1 ampersand 
+set $azer2 eacute 
+set $azer3 quotedbl 
+set $azer4 apostrophe 
+set $azer5 parenleft 
+set $azer6 minus 
+set $azer7 egrave 
+set $azer8 underscore 
+set $azer9 ccedilla 
+set $azer0 agrave 
+
+# switch to workspace
+bindsym $mod+$azer1 workspace $ws1
+bindsym $mod+$azer2 workspace $ws2
+bindsym $mod+$azer3 workspace $ws3
+bindsym $mod+$azer4 workspace $ws4
+bindsym $mod+$azer5 workspace $ws5
+bindsym $mod+$azer6 workspace $ws6
+bindsym $mod+$azer7 workspace $ws7
+bindsym $mod+$azer8 workspace $ws8
+bindsym $mod+$azer9 workspace $ws9
+bindsym $mod+$azer0 workspace $ws0
+
+# move focused container to workspace
+bindsym $mod+Shift+$azer1 move container to workspace $ws1
+bindsym $mod+Shift+$azer2 move container to workspace $ws2
+bindsym $mod+Shift+$azer3 move container to workspace $ws3
+bindsym $mod+Shift+$azer4 move container to workspace $ws4
+bindsym $mod+Shift+$azer5 move container to workspace $ws5
+bindsym $mod+Shift+$azer6 move container to workspace $ws6
+bindsym $mod+Shift+$azer7 move container to workspace $ws7
+bindsym $mod+Shift+$azer8 move container to workspace $ws8
+bindsym $mod+Shift+$azer9 move container to workspace $ws9
+bindsym $mod+Shift+$azer0 move container to workspace $ws0
+
