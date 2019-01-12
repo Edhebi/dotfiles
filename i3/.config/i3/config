@@ -1,77 +1,55 @@
-### GENERATED FILE, DONT EDIT MANUALY
+exec_always --no-startup-id "~/.config/i3/autorun.sh &"
 set $mod Mod4
 set $alt Mod1
-
-exec --no-startup-id "wal -R"
-exec --no-startup-id "xcompmgr -r"
+font pango:monospace 8
+set $mv 20px
+set $mvppt 2ppt
+set $gapsize 25
 floating_modifier $mod
+force_focus_wrapping yes
+set_from_resource $fg i3wm.color7 #f00
+set_from_resource $bg i3wm.color0 #0f0
+set_from_resource $ac i3wm.color2 #00f
+
+
 
 
 bindsym $mod+Shift+a kill
-
-bindsym $mod+m exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+m exec i3-dmenu-desktop --dmenu="dmenu -i -nb $bg -nf $fg -sb $ac -sf $bg"
 bindsym $mod+Return exec st
 bindsym $mod+b exec qutebrowser
-
-
-# change focus
 bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
-
-# move focused window
 bindsym $mod+Shift+h move left
+bindsym $mod+j focus down
 bindsym $mod+Shift+j move down
+bindsym $mod+k focus up
 bindsym $mod+Shift+k move up
+bindsym $mod+l focus right
 bindsym $mod+Shift+l move right
-
-#bindsym $mod+Shift+Right move right
-
-# split in horizontal orientation
-#bindsym $mod+h split h
-
-# split in vertical orientation
-bindsym $mod+v split v
-
-# enter fullscreen mode for the focused container
+bindsym $mod+Left resize shrink width $mv or $mvppt
+bindsym $mod+Down resize grow height $mv or $mvppt
+bindsym $mod+Up resize shrink height $mv or $mvppt
+bindsym $mod+Right resize grow width $mv or $mvppt
+bindsym $mod+Shift+Down split v
+bindsym $mod+Shift+Right split h
 bindsym $mod+f fullscreen toggle
-
-# change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+z layout tabbed
-bindsym $mod+e layout toggle split
-
-# toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
-
-# change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
-
-# focus the parent container
-bindsym $mod+q focus parent
-
-# focus the child container
-#bindsym $mod+d focus child
-
-# reload the configuration file
-bindsym $mod+Shift+c exec "uictl i3 build reload" 
-
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r exec "uictl i3 build restart"
-
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
-
-
-font pango:Inconsolata Nerd Font Mona 8
-
-for_window [class="^.*"] border pixel 2
-gaps inner 20
-
-
-# Define names for default workspaces for which we configure key bindings later on.
-# We use variables to avoid repeating the names in multiple places.
+bindsym $mod+g gaps inner current set 0
+bindsym $mod+Control+g gaps inner all set 0
+bindsym $mod+Shift+g gaps inner current set $gapsize
+bindsym $mod+Control+Shift+g gaps inner all set $gapsize
+bindsym $mod+Control+c exec "~/.config/i3/ppi3.rb ~/.config/i3/_config ~/.config/i3/config && i3-msg reload"
+bindsym $mod+Control+r exec "~/.config/i3/ppi3.rb ~/.config/i3/_config ~/.config/i3/config && i3-msg restart"
+bindsym $mod+Control+e exec echo a\\nb | dmenu
+bindsym $mod+Control+l exec "xautolock -locknow"
+for_window [class="^.*"] border pixel 5
+gaps inner $gapsize
+client.focused $ac $bg $fg $ac $ac
+client.focused_inactive $bg $bg $fg $bg $bg
+client.unfocused $bg $bg $fg $bg $bg
+client.urgent $bg $bg $fg $bg $bg
+client.placeholder $bg $bg $fg $bg $bg
+client.background $bg
 set $ws1 "1"
 set $ws2 "2"
 set $ws3 "3"
@@ -81,68 +59,34 @@ set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
-set $ws0 "10"
-
-# frencgh keyboards ...
-set $azer1 ampersand 
-set $azer2 eacute 
-set $azer3 quotedbl 
-set $azer4 apostrophe 
-set $azer5 parenleft 
-set $azer6 minus 
-set $azer7 egrave 
-set $azer8 underscore 
-set $azer9 ccedilla 
-set $azer0 agrave 
-
-# switch to workspace
-bindsym $mod+$azer1 workspace $ws1
-bindsym $mod+$azer2 workspace $ws2
-bindsym $mod+$azer3 workspace $ws3
-bindsym $mod+$azer4 workspace $ws4
-bindsym $mod+$azer5 workspace $ws5
-bindsym $mod+$azer6 workspace $ws6
-bindsym $mod+$azer7 workspace $ws7
-bindsym $mod+$azer8 workspace $ws8
-bindsym $mod+$azer9 workspace $ws9
-bindsym $mod+$azer0 workspace $ws0
-
-# move focused container to workspace
-bindsym $mod+Shift+$azer1 move container to workspace $ws1
-bindsym $mod+Shift+$azer2 move container to workspace $ws2
-bindsym $mod+Shift+$azer3 move container to workspace $ws3
-bindsym $mod+Shift+$azer4 move container to workspace $ws4
-bindsym $mod+Shift+$azer5 move container to workspace $ws5
-bindsym $mod+Shift+$azer6 move container to workspace $ws6
-bindsym $mod+Shift+$azer7 move container to workspace $ws7
-bindsym $mod+Shift+$azer8 move container to workspace $ws8
-bindsym $mod+Shift+$azer9 move container to workspace $ws9
-bindsym $mod+Shift+$azer0 move container to workspace $ws0
-
-
-# resize window (you can also use the mouse for that)
-mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
-
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym m resize grow width 10 px or 10 ppt
-
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
-
-        # back to normal: Enter or Escape or $mod+r
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+r mode "default"
-}
-
-bindsym $mod+r mode "resize"
+set $ws10 "10"
+set $key1 ampersand
+set $key2 eacute
+set $key3 quotedbl
+set $key4 apostrophe
+set $key5 parenleft
+set $key6  minus
+set $key7 egrave
+set $key8 underscore
+set $key9 ccedilla
+set $key10 agrave 
+bindsym $mod+$key1  workspace $ws1
+bindsym $mod+Shift+$key1 move container to workspace $ws1
+bindsym $mod+$key2  workspace $ws2
+bindsym $mod+Shift+$key2 move container to workspace $ws2
+bindsym $mod+$key3  workspace $ws3
+bindsym $mod+Shift+$key3 move container to workspace $ws3
+bindsym $mod+$key4  workspace $ws4
+bindsym $mod+Shift+$key4 move container to workspace $ws4
+bindsym $mod+$key5  workspace $ws5
+bindsym $mod+Shift+$key5 move container to workspace $ws5
+bindsym $mod+$key6  workspace $ws6
+bindsym $mod+Shift+$key6 move container to workspace $ws6
+bindsym $mod+$key7  workspace $ws7
+bindsym $mod+Shift+$key7 move container to workspace $ws7
+bindsym $mod+$key8  workspace $ws8
+bindsym $mod+Shift+$key8 move container to workspace $ws8
+bindsym $mod+$key9  workspace $ws9
+bindsym $mod+Shift+$key9 move container to workspace $ws9
+bindsym $mod+$key10  workspace $ws10
+bindsym $mod+Shift+$key10 move container to workspace $ws10

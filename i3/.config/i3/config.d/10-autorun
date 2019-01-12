@@ -1,2 +1,0 @@
-exec --no-startup-id "wal -R"
-exec --no-startup-id "xcompmgr -r"

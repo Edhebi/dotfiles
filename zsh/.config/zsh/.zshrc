@@ -1,7 +1,3 @@
-# ENVIRONMENT -----------------------------------
-
-export RC="$ZDOTDIR/.zshrc"
-export PATH="$PATH:$HOME/.bin"
 
 # ZSH OPTIONS  ----------------------------------
 # directories
@@ -39,7 +35,12 @@ unsetopt beep
 # ALIASES ---------------------------------------
 alias v="nvim"
 alias :q="exit"
-alias r="R" # I don't often use R, but when I do, I mistype it
+alias r="ranger"
+alias ls="ls -hNA --color=auto --group-directories-first"
+alias grep="grep --color=auto"
+alias mkdir="mkdir -pv"
+
+mkcd() { mkdir "$1" && cd "$1" }
 
 # PLUGINS ---------------------------------------
 ZPLUG_HOME=$HOME/.local/share/zplug
@@ -71,6 +72,10 @@ DEFAULT_MACHINE=tangerine
 SEP=$'\ue0b0'
 
 SEG_PWD="%{$fg[black]%}%{$bg[cyan]%} %~ "
-SEG_END="%{$fg[cyan]%}%{$bg[black]%}$SEP%{$reset_color%} "
+SEG_END="%{$reset_color%}%{$fg[cyan]%}$SEP%{$reset_color%} "
 
 PROMPT="$SEG_PWD$SEG_END"
+
+# FIXME
+# pgrep -x xcompmgr >/dev/null || xcompmgr >/dev/null &
+

@@ -2,6 +2,7 @@ if &compatible
   set nocompatible
 endif
 
-for f in split(glob('~/.config/nvim/config.d/*.vim'), '\n')
-  exe 'source' f
-endfor
+exe "source" "~/.config/nvim/config.d/10.plugins.vim"
+exe "source" "~/.config/nvim/config.d/20.init.vim"
+exe "source" "~/.config/nvim/config.d/30.completion.vim"
+exe "source" "~/.config/nvim/config.d/40.bindings.vim"

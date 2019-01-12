@@ -1,0 +1,13 @@
+#!/bin/bash
+
+WPDIR="${XDG_CACHE_HOME:-$HOME/.cache}/i3lock"
+mkdir -p "$WPDIR"
+TMPWP=$(mktemp blurred.XXX.png -p "$WPDIR")
+FILTER='boxblur=7'
+RES=$(xdpyinfo | awk '/dimensions:/{print $2}')
+
+ffmpeg -f x11grab -video_size $RES -y -i $DISPLAY -filter_complex "$FILTER" \
+       -vframes 1 $TMPWP -loglevel quiet
+
+i3lock -u -p default -i $TMPWP
+rm $TMPWP
