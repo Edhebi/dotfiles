@@ -5,7 +5,11 @@ if dein#load_state('~/.local/share/dein')
   call dein#add('~/.local/share/dein/repos/github.com/Shougo/dein.vim')
 
   " completion
-  " complet#add('Shougo/d
+  call dein#add('ludovicchabant/vim-gutentags')
+  call dein#add('c0r73x/neotags.nvim')
+  call dein#add('majutsushi/tagbar')
+  call dein#add('lervag/vimtex')
+  call dein#add('beyondmarc/glsl.vim')
   call dein#add('Shougo/deoplete.nvim')
   call dein#add('Shougo/neoinclude.vim')
   call dein#add('autozimu/LanguageClient-neovim', {
@@ -14,6 +18,12 @@ if dein#load_state('~/.local/share/dein')
     \ })
 
   " utilities
+  call dein#add('ervandew/supertab')
+  call dein#add('tpope/vim-surround')
+  call dein#add('tpope/vim-speeddating')
+  call dein#add('tpope/vim-repeat')
+  call dein#add('svermeulen/vim-yoink')
+" call dein#add('svermeulen/vim-subversive')
   call dein#add('lambdalisue/suda.vim')
   call dein#add('jalvesaq/nvim-r')
 
@@ -29,20 +39,19 @@ if dein#load_state('~/.local/share/dein')
   call dein#save_state()
 endif
 
-let g:python_host_prog = '/bin/python2'
-let g:python3_host_prog = '/bin/python3'
-
 filetype plugin indent on
 syntax enable
 
 if dein#check_install()
   call dein#install()
-" call dein#update()
-" call dein#remote_plugins()
+"  call dein#update()
+"  call dein#remote_plugins()
 endif
 
-"if len(dein#check_clean()) == 0
+"if len(dein#check_clean()) != 0
 "  call map(dein#check_clean(), "delete(v:val, 'rf')")
 "  call dein#recache_runtimepath()
 "endif
+
+set runtimepath+=~/.local/share/dein/.cache/init.vim/.dein/ftdetect/ftdetect.vim
 

@@ -11,6 +11,5 @@ then
 	xautolock -time 7 -locker "systemctl suspend" >/dev/null
 fi
 
-killall -q compton
-while pgrep -u $UID -x compton>/dev/null; do sleep 1; done
-compton --config ~/.config/compton/compton.conf -b 2>&1 >/dev/null &
+pgrep -x twmnd >/dev/null || twmnd >/dev/null &
+

@@ -1,8 +1,10 @@
-if &compatible
-  set nocompatible
-endif
+if &compatible | set nocompatible | endif
 
-exe "source" "~/.config/nvim/config.d/10.plugins.vim"
-exe "source" "~/.config/nvim/config.d/20.init.vim"
-exe "source" "~/.config/nvim/config.d/30.completion.vim"
-exe "source" "~/.config/nvim/config.d/40.bindings.vim"
+let g:python_host_prog='/bin/python2'
+let g:python3_host_prog='/bin/python3'
+
+source $HOME/.config/nvim/conf/init.vim
+source $HOME/.config/nvim/conf/general.vim
+source $HOME/.config/nvim/conf/plugins.vim
+source $HOME/.config/nvim/conf/completion.vim
+source $HOME/.config/nvim/conf/bindings.vim

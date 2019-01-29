@@ -1,0 +1,3 @@
+#!/bin/sh
+
+xinput enable $(xinput | grep TouchPad | sed -r 's/.*id=([0-9]+).*/\1/')

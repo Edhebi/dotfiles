@@ -1,5 +1,7 @@
+################################################################################
+#                                  ZSH OPTIONS                                 #
+################################################################################
 
-# ZSH OPTIONS  ----------------------------------
 # directories
 setopt auto_cd
 setopt pushd_ignore_dups
@@ -32,7 +34,10 @@ bindkey -v
 # no. fucking. beeps
 unsetopt beep
 
-# ALIASES ---------------------------------------
+################################################################################
+#                                   ALIASES                                    #
+################################################################################
+
 alias v="nvim"
 alias :q="exit"
 alias r="ranger"
@@ -42,28 +47,44 @@ alias mkdir="mkdir -pv"
 
 mkcd() { mkdir "$1" && cd "$1" }
 
-# PLUGINS ---------------------------------------
+################################################################################
+#                                   PLUGINS                                    #
+################################################################################
+
 ZPLUG_HOME=$HOME/.local/share/zplug
 source $ZPLUG_HOME/init.zsh
 
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 zplug 'agnoster/agnoster-zsh-theme'
 zplug 'zsh-users/zsh-autosuggestions'
+zplug 'rupa/z'
 
 if ! zplug check --verbose; then
 	printf "Install ? [y/N]: "
-	read -q && zplug install
+	read -q && echo "" && zplug install
 fi
 
 zplug load
 
-# COMPLETION ------------------------------------
+_Z_DATA=$HOME/.local/share/z/data
+source "$ZPLUG_REPOS/rupa/z/z.sh"
+
+################################################################################
+#                                  COMPLETION                                  #
+################################################################################
+
 autoload -Uz compinit && compinit
 
-# WAL -------------------------------------------
+################################################################################
+#                                    PYWAL                                     #
+################################################################################
+
 [ -f ~/.cache/wal/sequences ] && (cat ~/.cache/wal/sequences &)
 
-# PROMPT ----------------------------------------
+################################################################################
+#                                    PROMPT                                    #
+################################################################################
+
 autoload -Uz promptinit && promptinit
 autoload -Uz colors && colors
 setopt promptsubst
@@ -75,7 +96,4 @@ SEG_PWD="%{$fg[black]%}%{$bg[cyan]%} %~ "
 SEG_END="%{$reset_color%}%{$fg[cyan]%}$SEP%{$reset_color%} "
 
 PROMPT="$SEG_PWD$SEG_END"
-
-# FIXME
-# pgrep -x xcompmgr >/dev/null || xcompmgr >/dev/null &
 

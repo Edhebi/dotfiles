@@ -6,8 +6,8 @@ accent2 = ${xrdb:color2:#0ff}
 accent3 = ${xrdb:color3:#f0f}
 
 [fonts]
-mono = Inconsolata Nerd Font Mono:size=12;1
-mono-fullheight = Inconsolata Nerd Font Mono:pixelsize=17;3
+mono = Hack Nerd Font Mono:size=12;2
+mono-fullheight = Hack Nerd Font Mono:size=17;4
 fontawesome = Font Awesome 5 Free:style=solid:size=11;2
 
 [settings]
@@ -16,7 +16,7 @@ format-foreground = ${colors.background}
 [bar/master]
 monitor = eDP1
 width = 100%
-height = 22
+height = 23
 line-size = 0
 
 background = ${colors.background}
@@ -26,9 +26,9 @@ font-0 = ${fonts.mono}
 font-1 = ${fonts.mono-fullheight}
 font-2 = ${fonts.fontawesome}
 
-modules-left = p1 powermenu l12 i3
+modules-left = p1 powermenu l12 i3 l21 mpd l10
 modules-center = date
-modules-right =  r20 cpu r12 memory r21 keyboard r12 audio r21 wifi r12 battery p1
+modules-right =  r20 cpu r12 memory r21 keyboard r12 volume r21 wifi r12 battery p1
 
 locale = fr_FR.UTF-8
 enable-ipc = true
@@ -74,7 +74,7 @@ content-suffix = %{T1} %{T-}
 
 [module/l21]
 type = custom/text
-content = %{T2}%{T-}
+content = %{T2}%{T-}
 content-foreground = ${colors.accent2}
 content-background = ${colors.accent1}
 content-prefix = %{T1} %{T-}
@@ -89,15 +89,32 @@ content-background = ${colors.background}
 content-suffix = %{T1} %{T-}
 content-suffix-background = ${colors.accent2}
 
-[module/audio]
-type = internal/pulseaudio
-inherit = section/acc1
-sink = alsa_output.pci-0000_00_1f.3.analog-stereo
+[module/l10]
+type = custom/text
+content = %{T2}%{T-}
+content-foreground = ${colors.accent1}
+content-background = ${colors.background}
+content-prefix = %{T1} %{T-}
+content-prefix-background = ${colors.accent1}
 
-format-volume = %{T3}{T-} <label-volume>
+[module/volume]
+type = internal/alsa
+inherit = section/acc1
+interval = 5
+
+master-mixer = Master
+speaker-mixer = Speaker
+headphone-mixer = Headphone
+headphone-id = 15
+
+format-volume = <ramp-volume> <label-volume>
 format-volume-background = ${self.bg}
+
 format-muted = %{T3}%{T-}
 format-muted-background = ${self.bg}
+
+ramp-volume-0 = %{T3}%{T-}
+ramp-headphones-0 = %{T3}%{T-}
 
 [module/battery]
 type = internal/battery
@@ -110,7 +127,6 @@ format-discharging = <ramp-capacity> <label-discharging>
 format-discharging-background = ${self.bg}
 format-full = %{T3}%{T-} 100%
 format-full-background = ${self.bg}
-
 
 animation-charging-0 = 
 animation-charging-1 = 
@@ -172,6 +188,24 @@ interval = 3
 
 format = %{T3}%{T-} <label>
 format-background = ${self.bg}
+
+[module/mpd]
+type = internal/mpd
+inherit = section/acc1
+host = localhost
+port = 6600
+
+format-playing = %{T3}%{T-} <label-song> (<label-time>)
+format-playing-background = ${self.bg}
+
+format-paused = %{T3}%{T-} <label-song> (<label-time>)
+format-paused-background = ${self.bg}
+
+format-stopped = %{T3}%{T-}
+format-stopped-background = ${self.bg}
+
+label-time = %elapsed%/%total%
+label-song = %artist:0:15:...% - %title:0:15:...%
 
 [module/powermenu]
 type = custom/menu

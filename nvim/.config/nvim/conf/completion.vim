@@ -1,6 +1,22 @@
+" ludovicchabant/gutentags
+let g:gutentags_cache_dir=expand('~/.cache/vim_tags')
+set statusline+=%{gutentags#statusline()}
 
-" deoplete
+augroup GutentagsAirlineRefresh
+  autocmd!
+  autocmd User GutentagsUpdating call airline#update_statusline()
+  autocmd User GutentagsUpdated  call airline#update_statusline()
+augroup END
 
+" c0r37x/neotags.nvim
+let g:neotags_enabled=1
+let g:neotags_directory=expand('~/.cache/vim_tags')
+let g:neotags_run_ctags=0
+
+" majutsushi/tagbar
+nmap <F8> :TagbarToogle<CR>
+
+" Shougo/deoplete
 let g:deoplete#enable_at_startup=1
 let g:deoplete#enable_smart_case=1
 
@@ -15,8 +31,6 @@ endif
 
 call deoplete#custom#source('_', 'disable_syntaxes', ['Comment', 'String'])
 
-"autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-
 call deoplete#custom#option('sources', {
   \ 'c'  : ['LanguageClient'],
   \ 'cpp': ['LanguageClient'],
@@ -25,11 +39,11 @@ call deoplete#custom#option('sources', {
 let g:deoplete#ignore_sources={}
 let g:deoplete#ignore_sources._=['buffer', 'around']
 
-" LanguageClient
+" autozimu/LanguageClient
 
 let g:LanguageClient_serverCommands={
-  \ 'c':   ['cquery'],
-  \ 'cpp': ['cquery'],
+  \ 'c':   ['clangd'],
+  \ 'cpp': ['clangd'],
   \ }
 
 let g:LanguageClient_autoStart=1
