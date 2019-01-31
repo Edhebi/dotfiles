@@ -9,7 +9,7 @@ augroup GutentagsAirlineRefresh
 augroup END
 
 " c0r37x/neotags.nvim
-let g:neotags_enabled=1
+let g:neotags_enabled=0
 let g:neotags_directory=expand('~/.cache/vim_tags')
 let g:neotags_run_ctags=0
 

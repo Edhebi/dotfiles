@@ -19,7 +19,7 @@ if dein#load_state('~/.local/share/dein')
 
   " utilities
   call dein#add('ervandew/supertab')
-  call dein#add('tpope/vim-surround')
+  call dein#add('jiangmiao/auto-pairs')
   call dein#add('tpope/vim-speeddating')
   call dein#add('tpope/vim-repeat')
   call dein#add('svermeulen/vim-yoink')
