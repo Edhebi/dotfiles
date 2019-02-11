@@ -239,9 +239,9 @@ inherit = section/acc2
 interface = wlo1
 interval = 2
 
-format-connected = %{A:sudo connman_dmenu:}%{T3}%{T-} <label-connected>%{A}
+format-connected = %{A:networkmanager_dmenu:}%{T3}%{T-} <label-connected>%{A}
 format-connected-background = ${self.bg}
-format-disconnected = %{A:sudo connman_dmenu:}%{T3}%{T-}%{A}
+format-disconnected = %{A:networkmanager_dmenu:}%{T3}%{T-}%{A}
 format-disconnected-background = ${self.bg}
 
 label-connected = %essid%

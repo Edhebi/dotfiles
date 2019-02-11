@@ -1,0 +1,10 @@
+#!/bin/bash
+
+echo "##"
+while :; do
+
+	d="$(LANG=fr_FR.UTF-8 date '+%A %d %B - %R')"
+	xsetroot -name "$d"
+	sleep 0.2
+
+done

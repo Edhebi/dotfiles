@@ -1,0 +1,25 @@
+diff -ura a/dwm.c b/dwm.c
+--- a/dwm.c	2019-02-09 23:08:26.063333109 +0100
++++ b/dwm.c	2019-02-09 23:10:03.533333133 +0100
+@@ -59,7 +59,7 @@
+ 
+ /* enums */
+ enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
+-enum { SchemeNorm, SchemeSel }; /* color schemes */
++enum { SchemeNorm, SchemeSel, SchemeUrg }; /* color schemes */
+ enum { NetSupported, NetWMName, NetWMState, NetWMCheck,
+        NetWMFullscreen, NetActiveWindow, NetWMWindowType,
+        NetWMWindowTypeDialog, NetClientList, NetLast }; /* EWMH atoms */
+@@ -2022,8 +2022,11 @@
+ 		if (c == selmon->sel && wmh->flags & XUrgencyHint) {
+ 			wmh->flags &= ~XUrgencyHint;
+ 			XSetWMHints(dpy, c->win, wmh);
+-		} else
++		} else {
+ 			c->isurgent = (wmh->flags & XUrgencyHint) ? 1 : 0;
++			if (c->isurgent)
++				XSetWindowBorder(dpy, c->win, scheme[SchemeUrg][ColBorder].pixel);
++		}
+ 		if (wmh->flags & InputHint)
+ 			c->neverfocus = !wmh->input;
+ 		else
