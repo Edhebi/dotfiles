@@ -44,8 +44,14 @@ alias r="ranger"
 alias ls="ls -hNA --color=auto --group-directories-first"
 alias grep="grep --color=auto"
 alias mkdir="mkdir -pv"
+alias vd="nvim -d"
 
 mkcd() { mkdir "$1" && cd "$1" }
+
+serve() {
+	local ip=$(ip a s wlo1 | awk '/inet /{print $2}' | cut -d/ -f1)
+	php -S "$ip:${1:-8000}"
+}
 
 ################################################################################
 #                                   PLUGINS                                    #

@@ -1,10 +1,11 @@
 #!/bin/bash
 
-echo "##"
+echo "dwm-status started ..."
 while :; do
 
-	d="$(LANG=fr_FR.UTF-8 date '+%A %d %B - %R')"
-	xsetroot -name "$d"
-	sleep 0.2
+	d="$(LANG=fr_FR.UTF-8 date '+%A %d %B')"
+	t="$(LANG=fr_FR.UTF-8 date '+%R')"
+	xsetroot -name "[$d][$t]"
+	sleep 0.5
 
 done

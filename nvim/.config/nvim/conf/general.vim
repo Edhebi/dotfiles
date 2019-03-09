@@ -12,9 +12,10 @@ set modelines=5
 " tabs
 set autoindent
 set tabstop=4
-set softtabstop=0
-set noexpandtab
+set softtabstop=4
 set shiftwidth=4
+set noexpandtab
+autocmd BufWritePre * %s/\s\+$//e
 
 " theme
 set termguicolors
@@ -32,8 +33,13 @@ set foldcolumn=1
 set foldlevelstart=3
 nnoremap <silent> <c-space> za<cr>
 
-
 " terminal
 tnoremap <esc> <c-\><c-n>
 autocmd BufWinEnter,WinEnter term://* startinsert
 autocmd BufLeave term://* stopinsert
+
+" git
+if has('nvim')
+  let $GIT_EDITOR = 'nvr -cc split --remote-wait'
+endif
+autocmd FileType gitcommit set bufhidden=delete

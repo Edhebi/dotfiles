@@ -32,24 +32,31 @@ endif
 call deoplete#custom#source('_', 'disable_syntaxes', ['Comment', 'String'])
 
 call deoplete#custom#option('sources', {
-  \ 'c'  : ['LanguageClient'],
-  \ 'cpp': ['LanguageClient'],
+  \ 'c'  :     ['LanguageClient'],
+  \ 'cpp':     ['LanguageClient'],
+  \ 'rust':    ['LanguageClient'],
+  \ 'python':  ['LanguageClient'],
+  \ 'pyhton3': ['LanguageClient'],
+  \ 'vim':     ['vim'],
   \ })
 
 let g:deoplete#ignore_sources={}
-let g:deoplete#ignore_sources._=['buffer', 'around']
+let g:deoplete#ignore_sources._=['buffer', 'around', 'tag']
 
 " autozimu/LanguageClient
 
 let g:LanguageClient_serverCommands={
-  \ 'c':   ['clangd'],
-  \ 'cpp': ['clangd'],
+  \ 'c':      ['/usr/bin/cquery', '--init={"cacheDirectory":"/home/leo/.cache/cquery"}'],
+  \ 'cpp':    ['/usr/bin/cquery', '--init={"cacheDirectory":"/home/leo/.cache/cquery"}'],
+  \ 'python': ['/usr/bin/pyls'],
+  \ 'rust':   ['rustup', 'run', 'stable', 'rls'],
   \ }
 
 let g:LanguageClient_autoStart=1
 let g:LanguageClient_rootMarkers={
-  \ 'c':   ['compile_commands.json', 'build', '.git'],
-  \ 'cpp': ['compile_commands.json', 'build', '.git'],
+  \ 'c':    ['compile_commands.json', 'build', '.git'],
+  \ 'cpp':  ['compile_commands.json', 'build', '.git'],
+  \ 'rust': ['Cargo.toml', '.git'],
   \ }
 
 set completefunc=LanguageClient#complete

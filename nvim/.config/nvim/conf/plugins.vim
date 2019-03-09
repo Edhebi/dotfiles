@@ -9,6 +9,6 @@ let g:NERDTreeQuitOnOpen=1
 let g:SuperTabDefaultCompletionType="<c-n>"
 
 " vimtex
-let g:vimtex_compiler_program='nvr'
+let g:vimtex_compiler_progname='nvr'
 let g:vimtex_view_method='zathura'
 

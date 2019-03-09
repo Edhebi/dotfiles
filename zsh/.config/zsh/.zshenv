@@ -1,5 +1,9 @@
 
-export PATH="$PATH:$HOME/.bin"
+PATH="$PATH:$HOME/.bin"
+PATH="$PATH:$HOME/.gem/ruby/2.6.0/bin"
+export PATH
+
+export EDITOR='nvim'
 
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
