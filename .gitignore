@@ -1,8 +1,0 @@
-i3/.config/i3/config
-
-st/localpkg/st/*
-!st/localpkg/st/config.h
-!st/localpkg/st/PKGBUILD
-
-zsh/.config/zsh/.zcompdump
-
