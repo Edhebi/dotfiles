@@ -1,0 +1,5 @@
+# this is required to avoid tracking makepkg files
+*
+!.gitignore
+!PKGBUILD
+!config.h
