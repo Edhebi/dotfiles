@@ -1,9 +1,12 @@
-pkgname=dmenu
-pkgver=4.8
+pkgname=dmenu-local
+_pkgsourcename=dmenu
+pkgver=4.9
 pkgrel=1
 pkgdesc='A simple dynamic menu for X.'
 arch=('x86_64')
 license=('MIT')
+provides=('dmenu')
+conflicts=('dmenu')
 depends=('sh' 'libxinerama' 'libxft' 'freetype2')
 url="https://tools.suckless.org/dmenu"
 
@@ -13,11 +16,11 @@ source=("http://dl.suckless.org/tools/dmenu-$pkgver.tar.gz"
         "config.h"
         "${_patches[@]}")
 
-sha256sums=('fe615a5c3607061e2106700862e82ac62a9fa1e6a7ac3d616a9c76106476db61'
-            'b08ebd39f5b9be1b5e2efedbb27dd1bc3e03e31903f415c5395ed88670180562')
+sha256sums=('b3971f4f354476a37b2afb498693649009b201550b0c7c88e866af8132b64945'
+            'b861525bda9f9f13a5faef0f075e1df2385e44d960e3360103394ecf12e65015')
 
 prepare() {
-  cd $srcdir/$pkgname-$pkgver
+  cd $srcdir/$_pkgsourcename-$pkgver
 
   for patch in "${_patches[@]}"; do
     patch -Np1 -i "$srcdir/$(basename $patch)"
@@ -28,13 +31,13 @@ prepare() {
 }
 
 build() {
-  cd $srcdir/$pkgname-$pkgver
+  cd $srcdir/$_pkgsourcename-$pkgver
   make X11INC=/usr/include/X11 X11LIB=/usr/lib/X11 FREETYPEINC=/usr/include/freetype2
 }
 
 package() {
-  cd $srcdir/$pkgname-$pkgver
+  cd $srcdir/$_pkgsourcename-$pkgver
   make PREFIX=/usr DESTDIR="$pkgdir" install
-  install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
-  install -Dm644 README "$pkgdir/usr/share/doc/$pkgname/README"
+  install -Dm644 LICENSE "$pkgdir/usr/share/licenses/dmenu/LICENSE"
+  install -Dm644 README "$pkgdir/usr/share/doc/dmenu/README"
 }

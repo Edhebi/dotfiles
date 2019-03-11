@@ -7,7 +7,12 @@ static const char *fonts[] = {
 	"Hack Nerd Font Mono:size=13"
 };
 static const char *prompt      = NULL;      /* -p  option; prompt to the left of input field */
-#include "/home/leo/.cache/wal/colors-wal-dmenu.h"
+static const char *colors[SchemeLast][2] = {
+	/*     fg         bg       */
+	[SchemeNorm] = { "#d8dee9", "#2e3440" },
+	[SchemeSel] = { "#d8dee9", "#4c566a" },
+	[SchemeOut] = { "#000000", "#00ffff" },
+};
 /* -l option; if nonzero, dmenu uses vertical list with given number of lines */
 static unsigned int lines      = 0;
 
