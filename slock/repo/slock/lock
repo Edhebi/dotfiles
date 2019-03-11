@@ -1,0 +1,9 @@
+#!/bin/bash
+
+#bspc desktop -f next\!occupied
+bspc desktop -l monocle
+st pipes &
+slock
+bspc node -c
+bspc desktop -l tiled
+#bspc desktop -f last
