@@ -26,7 +26,7 @@ setopt hist_ignore_all_dups
 
 HISTSIZE=10000
 SAVEHIST=9000
-HISTFILE="~/.local/share/zsh/history"
+HISTFILE="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/history"
 
 # bindings
 bindkey -v
@@ -44,7 +44,7 @@ alias r="ranger"
 alias ls="ls -hNA --color=auto --group-directories-first"
 alias grep="grep --color=auto"
 alias mkdir="mkdir -pv"
-alias vd="nvim -d"
+alias vdiff="nvim -d"
 
 mkcd() { mkdir "$1" && cd "$1" }
 
@@ -57,49 +57,31 @@ serve() {
 #                                   PLUGINS                                    #
 ################################################################################
 
-ZPLUG_HOME=$HOME/.local/share/zplug
+export ZPLUG_HOME=$HOME/.local/share/zplug
 source $ZPLUG_HOME/init.zsh
 
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
-zplug 'agnoster/agnoster-zsh-theme'
 zplug 'zsh-users/zsh-autosuggestions'
 zplug 'rupa/z'
 
 if ! zplug check --verbose; then
 	printf "Install ? [y/N]: "
-	read -q && echo "" && zplug install
+	read -q && echo && zplug install
 fi
 
 zplug load
 
-_Z_DATA=$HOME/.local/share/z/data
+export _Z_DATA=$HOME/.local/share/z/data
 source "$ZPLUG_REPOS/rupa/z/z.sh"
+
+#[ -f ~/.cache/wal/sequences ] && (cat ~/.cache/wal/sequences &)
+
+export PROMPT_DEFAULT_USER="$USER"
+source "$ZDOTDIR/prompt.zsh"
 
 ################################################################################
 #                                  COMPLETION                                  #
 ################################################################################
 
-autoload -Uz compinit && compinit
-
-################################################################################
-#                                    PYWAL                                     #
-################################################################################
-
-[ -f ~/.cache/wal/sequences ] && (cat ~/.cache/wal/sequences &)
-
-################################################################################
-#                                    PROMPT                                    #
-################################################################################
-
-autoload -Uz promptinit && promptinit
-autoload -Uz colors && colors
-setopt promptsubst
-DEFAULT_USER=leo
-DEFAULT_MACHINE=tangerine
-SEP=$'\ue0b0'
-
-SEG_PWD="%{$fg[black]%}%{$bg[cyan]%} %~ "
-SEG_END="%{$reset_color%}%{$fg[cyan]%}$SEP%{$reset_color%} "
-
-PROMPT="$SEG_PWD$SEG_END"
-
+autoload -Uz compinit && \
+	compinit -d "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump"
