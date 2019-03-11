@@ -20,9 +20,9 @@ autocmd BufWritePre * %s/\s\+$//e
 " theme
 set termguicolors
 set background=dark
-colorscheme gruvbox
+colorscheme nord
 set t_Co=255
-let g:airline_theme='gruvbox'
+let g:airline_theme='nord'
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enable=1
 let g:airline#extensions#tabline#formatter='unique_tail_improved'

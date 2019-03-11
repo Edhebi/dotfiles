@@ -30,8 +30,7 @@ if dein#load_state('~/.local/share/dein')
   " visual
   call dein#add('vim-airline/vim-airline')
   call dein#add('vim-airline/vim-airline-themes')
-  call dein#add('dylanaraps/wal.vim')
-  call dein#add('morhetz/gruvbox')
+  call dein#add('arcticicestudio/nord-vim')
   call dein#add('scrooloose/nerdtree')
   call dein#add('Xuyuanp/nerdtree-git-plugin')
 
