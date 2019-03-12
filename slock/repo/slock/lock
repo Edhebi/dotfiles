@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# command `pipes` from the `bash-pipes` package (aur)
+
 #bspc desktop -f next\!occupied
 bspc desktop -l monocle
 st pipes &
