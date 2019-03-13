@@ -2,10 +2,11 @@
 include-file = $HOME/.config/polybar/theme
 
 [colors]
-background = ${theme.background}
-foreground = ${theme.foreground}
-highlight  = ${theme.color6}
-dim = ${theme.color8}
+background = ${theme.color0}
+foreground = ${theme.color4}
+highlight  = ${theme.color8}
+dim        = ${theme.color9}
+dimmer     = ${theme.color3}
 
 [bar/master]
 monitor = eDP1
@@ -46,8 +47,11 @@ type = internal/bspwm
 format = <label-state>
 format-prefix = " "
 format-prefix-foreground = ${colors.highlight}
-label-focused-foreground = ${colors.highlight}
-label-empty-foreground = ${colors.dim}
+
+label-focused-foreground = ${colors.foreground}
+label-occupied-foreground = ${colors.dim}
+label-empty-foreground = ${colors.dimmer}
+
 [module/day]
 type = internal/date
 format-prefix = " "
