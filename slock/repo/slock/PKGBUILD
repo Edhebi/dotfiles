@@ -17,7 +17,7 @@ source=("http://dl.suckless.org/tools/slock-$pkgver.tar.gz"
 
 sha256sums=('b53849dbc60109a987d7a49b8da197305c29307fd74c12dc18af0d3044392e6a'
             '4eb0c6ce33f722f8e0c19a1915fb0f0c750fb6c0dd516af984436f2e1a2cca86'
-            '032be717df74030ce338fa6fd94e6a75e3bfe99b6a568d783dd5d154b0b1442e'
+            'eb4c6a76175b84cfd2f6c1bf27e7eb2500552d405013ccec24cac06f1dd67e5e'
             '86d5a4aca138435e46865a8bf9881eb5013d7a9064f8f3c19693b39c39dd8f41')
 
 prepare() {

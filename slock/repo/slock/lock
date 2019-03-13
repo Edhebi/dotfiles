@@ -2,10 +2,10 @@
 
 # command `pipes` from the `bash-pipes` package (aur)
 
-#bspc desktop -f next\!occupied
+bspc desktop -f 'next.!occupied'
 bspc desktop -l monocle
-st pipes &
+st pipes -p1 -f100 -s15 -r8000 &
 slock
 bspc node -c
 bspc desktop -l tiled
-#bspc desktop -f last
+bspc desktop -f last
