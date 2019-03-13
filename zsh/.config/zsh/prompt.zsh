@@ -35,10 +35,10 @@ prompt_git() {
 	local ref
 	is_dirty() {
 	}
-	
+
 	ref="$vcs_info_msg_0_"
 	[[ ! -n "$ref" ]] && return
-		
+
 	if test -n "$(git status --porcelain --ignore-submodules)"
 		then print -n " %{$fg[yellow]%}"
 		else print -n " %{$fg[green]%}"

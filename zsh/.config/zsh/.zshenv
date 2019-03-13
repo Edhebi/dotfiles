@@ -1,6 +1,6 @@
 
-PATH="$PATH:$HOME/.bin"
-PATH="$PATH:$HOME/.gem/ruby/2.6.0/bin"
+PATH="$PATH:$HOME/bin"
+#PATH="$PATH:$HOME/.gem/ruby/2.6.0/bin"
 export PATH
 
 export EDITOR='nvim'

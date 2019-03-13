@@ -1,4 +1,0 @@
-#!/bin/sh
-
-q=$(echo | dmenu)
-[ ! -z "$q" ] && surf "$q"
