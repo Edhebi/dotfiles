@@ -18,7 +18,7 @@ super + Return
 
 # program launcher
 super + m
-	dmenu_run
+	brofi -show run
 
 # make sxhkd reload its configuration files:
 super + Escape

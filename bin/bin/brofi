@@ -1,0 +1,15 @@
+#!/bin/bash
+
+TMPBG=$HOME/.cache/rofi/blurred.jpg
+
+RES=$(xrandr | awk '/*/{print $1}')
+
+ffmpeg -f x11grab -video_size $RES -y -i $DISPLAY -vframes 1 -filter_complex "boxblur=10:1" -loglevel quiet $TMPBG
+
+feh -F $TMPBG & export POD=$!
+rofi "$@"  & export ROFI=$!
+wmctrl -a $ROFI
+
+wait $ROFI
+kill $POD
+rm $TMPBG
