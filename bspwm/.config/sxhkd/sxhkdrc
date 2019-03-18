@@ -5,7 +5,7 @@
 # since sxhkd doesn't support variables :( and I don't realy wantto retype
 # that, here is the copypatable to row
 #
-# {ampersand,eacute,quotedbl,apostrophe,parenleft,minus,egrave,underscore,ccdedilla,agrave}
+# {ampersand,eacute,quotedbl,apostrophe,parenleft,minus,egrave,underscore,ccedilla,agrave}
 #
 
 #
@@ -110,7 +110,7 @@ super + {_,shift + }{h,j,k,l}
 #	bspc wm -h on
 
 # focus or send to the given desktop
-super + {_,shift + }{ampersand,eacute,quotedbl,apostrophe,parenleft,minus,egrave,underscore,ccdedilla,agrave}
+super + {_,shift + }{ampersand,eacute,quotedbl,apostrophe,parenleft,minus,egrave,underscore,ccedilla,agrave}
 	bspc {desktop -f,node -d} '^{1-9,10}'
 
 #
@@ -122,7 +122,7 @@ super + ctrl + {h,j,k,l}
 	bspc node -p {west,south,north,east}
 
 # preselect the ratio
-super + ctrl + {ampersand,eacute,quotedbl,apostrophe,parenleft,minus,egrave,underscore,ccdedilla,agrave}
+super + ctrl + {ampersand,eacute,quotedbl,apostrophe,parenleft,minus,egrave,underscore,ccedilla,agrave}
 	bspc node -o 0.{1-9}
 
 # cancel the preselection for the focused node
