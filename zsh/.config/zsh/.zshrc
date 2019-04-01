@@ -85,3 +85,12 @@ source "$ZDOTDIR/prompt.zsh"
 
 autoload -Uz compinit && \
 	compinit -d "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump"
+
+################################################################################
+#                                   SSH AGENT                                  #
+################################################################################
+
+pgrep -u "$USER" ssh-agent >/dev/null || ssh-agent > "$HOME/.cache/ssh/ssh-agent-vars"
+
+[[ ! "$SSH_AUTH_SOCK" ]] && eval "$(<"$HOME/.cache/ssh/ssh-agent-vars")" >/dev/null
+
