@@ -10,5 +10,5 @@ rofi.padding:               0
 rofi.separator-style:       none
 rofi.hide-scrollbar:        true
 rofi.line-margin:           0
-rofi.font:                  sans-serif 10
+rofi.font:                  Hack Nerd Font Mono 13
 rofi.theme:                 nord.rasi 
