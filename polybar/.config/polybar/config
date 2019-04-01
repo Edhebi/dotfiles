@@ -9,7 +9,7 @@ dim        = ${theme.color9}
 dimmer     = ${theme.color3}
 
 [bar/master]
-monitor = eDP1
+monitor = eDP-1-1
 width = 100%
 padding = 1
 height = 24
@@ -19,6 +19,29 @@ foreground = ${colors.foreground}
 
 font-0 = icomoon_polybar:size=13;3
 font-1 = Hack Nerd Font Mono:size=13;3
+font-2 = Source Han Sans:size:11;2
+
+modules-left = bspwm
+modules-center =
+modules-right = day time volume wifi battery
+module-margin = 1
+
+locale = fr_FR.UTF-8
+enable-ipc = true
+cursor-click = pointer
+
+[bar/secondary]
+monitor = HDMI-0
+width = 100%
+padding = 1
+height = 24
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+font-0 = icomoon_polybar:size=13;3
+font-1 = Hack Nerd Font Mono:size=13;3
+font-2 = Source Han Sans:size:11;2
 
 modules-left = bspwm
 modules-center =
@@ -45,7 +68,7 @@ format-full-prefix-foreground = ${colors.highlight}
 [module/bspwm]
 type = internal/bspwm
 format = <label-state>
-format-prefix = " "
+format-prefix = " "
 format-prefix-foreground = ${colors.highlight}
 
 label-focused-foreground = ${colors.foreground}
@@ -72,27 +95,27 @@ master-soundcard = hw:0
 format-volume = <ramp-volume> <label-volume>
 label-volume = %percentage%%
 
-ramp-volume-0 = 
-ramp-volume-1 = 
-ramp-volume-2 = 
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
 ramp-volume-foreground = ${colors.highlight}
 
-ramp-headphones-0 = 
-ramp-headphones-1 = 
+ramp-headphones-0 = 
+ramp-headphones-1 = 
 ramp-headphones-foreground = ${colors.highlight}
 
-format-muted-prefix = " "
+format-muted-prefix = " "
 format-muted-prefix-foreground = ${colors.highlight}
 label-muted = muted
 
 [module/wifi]
 type = internal/network
 interface = wlo1
-format-connected-prefix = " "
+format-connected-prefix = " "
 format-connected-prefix-foreground = ${colors.highlight}
 label-connected = %essid%
 format-disconnected = offline
-format-disconnected-prefix = " "
+format-disconnected-prefix = " "
 format-disconnected-prefix-foreground = ${colors.highlight}
 
 ; vim:ft=dosini
