@@ -40,17 +40,27 @@ unsetopt beep
 
 alias v="nvim"
 alias :q="exit"
-alias r="ranger"
-alias ls="ls -hNA --color=auto --group-directories-first"
+alias ls!="/bin/ls -hNA --color=auto --group-directories-first"
 alias grep="grep --color=auto"
 alias mkdir="mkdir -pv"
+alias rmrf="rm -rf"
 alias vdiff="nvim -d"
+alias za="zathura"
+alias py="python"
 
 mkcd() { mkdir "$1" && cd "$1" }
 
 serve() {
 	local ip=$(ip a s wlo1 | awk '/inet /{print $2}' | cut -d/ -f1)
 	php -S "$ip:${1:-8000}"
+}
+
+ls() {
+	lsd "$@" --group-dirs first
+}
+
+entrls() {
+	while true; ls! | entr -d -c lsd --tree --depth ${1:-2}
 }
 
 ################################################################################
@@ -63,16 +73,18 @@ source $ZPLUG_HOME/init.zsh
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 zplug 'zsh-users/zsh-autosuggestions'
 zplug 'rupa/z'
+zplug 'MichaelAquilina/zsh-autoswitch-virtualenv'
 
 if ! zplug check --verbose; then
 	printf "Install ? [y/N]: "
 	read -q && echo && zplug install
 fi
 
-zplug load
-
+export AUTOSWITCH_VIRTUAL_ENV_DIR="$HOME/.local/share/venv"
 export _Z_DATA=$HOME/.local/share/z/data
 source "$ZPLUG_REPOS/rupa/z/z.sh"
+
+zplug load
 
 #[ -f ~/.cache/wal/sequences ] && (cat ~/.cache/wal/sequences &)
 
@@ -83,14 +95,28 @@ source "$ZDOTDIR/prompt.zsh"
 #                                  COMPLETION                                  #
 ################################################################################
 
-autoload -Uz compinit && \
+if autoload -Uz compinit; then
 	compinit -d "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump"
+	kitty + complete setup zsh | source /dev/stdin
+fi
+
+zstyle ':completion:*'             verbose yes
+zstyle ':completion:*:description' format '%B%d%b'
+zstyle ':completion:*:messages'    format '%d'
+zstyle ':completion:*:warnings'    format 'No matches for: %d'
+zstyle ':completion:*'             group-name ''
+
+fpath=("$HOME/.local/share/completions" $fpath)
+autoload -U "$HOME/.local/share/completions/*(:t)"
 
 ################################################################################
 #                                   SSH AGENT                                  #
 ################################################################################
 
-pgrep -u "$USER" ssh-agent >/dev/null || ssh-agent > "$HOME/.cache/ssh/ssh-agent-vars"
-
-[[ ! "$SSH_AUTH_SOCK" ]] && eval "$(<"$HOME/.cache/ssh/ssh-agent-vars")" >/dev/null
+if ! pgrep -u "$USER" ssh-agent >/dev/null; then
+	ssh-agent > "$HOME/.cache/ssh/ssh-agent-vars"
+fi
+if [[ ! "$SSH_AUTH_SOCK" ]]; then 
+	eval "$(<"$HOME/.cache/ssh/ssh-agent-vars")" >/dev/null
+fi
 

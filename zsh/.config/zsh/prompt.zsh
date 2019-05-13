@@ -10,12 +10,14 @@ typeset -aHg PROMPT_SEGMENTS=(
 	prompt_context
 	prompt_pwd
 	prompt_git
-)
+	prompt_venv
+	)
 
 prompt_status() {
-	if [[ $RETVAL -eq 0 ]]
-		then print -n " %{$fg[green]%}➜"
-		else print -n " %{$fg[red]%}✘"
+	if [[ $RETVAL -eq 0 ]]; then
+		print -n "%{$fg[green]%}➜ "
+	else
+		print -n "%{$fg[red]%}✘ "
 	fi
 }
 
@@ -23,30 +25,44 @@ prompt_context() {
 	local user=$(whoami)
 
 	if [[ "$user" != "$PROMPT_DEFAULT_USER" || -n "$SSH_CONNECTION" ]]; then
-		print -n " %{$fg[magenta]%}$user@%m"
+		print -n "%{$fg[magenta]%}$user@%m "
 	fi
 }
 
 prompt_pwd() {
-	print -n " %{$fg[cyan]%}%~"
+	print -n "%{$fg[cyan]%}%3~ "
 }
 
 prompt_git() {
-	local ref
-	is_dirty() {
-	}
+	local ref="$vcs_info_msg_0_"
 
-	ref="$vcs_info_msg_0_"
-	[[ ! -n "$ref" ]] && return
+	[[ -n "$ref" ]] || return
 
-	if test -n "$(git status --porcelain --ignore-submodules)"
-		then print -n " %{$fg[yellow]%}"
-		else print -n " %{$fg[green]%}"
+	if [ -n "$(git status --porcelain --ignore-submodules)" ]; then
+		print -n "%{$fg[yellow]%}"
+	else
+		print -n "%{$fg[green]%}"
 	fi
-	if [[ "${ref/.../}" == "$ref" ]];
-		then print -n " $ref"
-		else print -n "➦ $ref"
+	if [[ "${ref/.../}" == "$ref" ]]; then
+		print -n " $ref "
+	else
+		print -n "➦ $ref "
 	fi
+}
+
+prompt_venv() {
+	local venv="$VIRTUAL_ENV"
+
+	[[ -n "$venv" ]] || return
+
+	if [ -f "$venv/__name__" ]; then
+		local name="$(cat "$venv/__name")"
+	elif [ "$(basename "$venv")" = "__" ]; then
+		local name="$(basename "$(dirname "$venv")")"
+	else
+		local name="$(basename "$venv")"
+	fi
+	print -n "%{$fg[magenta]%} $name "
 }
 
 ## Main prompt
@@ -60,7 +76,7 @@ prompt_main() {
 
 prompt_precmd() {
 	vcs_info
-	PROMPT='$(prompt_main) %{$reset_color%}'
+	PROMPT='$(prompt_main)%{$reset_color%}'
 }
 
 prompt_setup() {
